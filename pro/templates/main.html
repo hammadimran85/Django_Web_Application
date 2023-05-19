@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+img
+{
+    border-radius: 100px;
+    margin-left: 700px;
+}
+</style>
+</head>
+<body>
+Hi Welcome to the Shopify Website, You can order multiple products .....         {{request.user}}
+<a href="{% url 'mylogout' %}">Logout</a><br>
+<!--<img src="{{ obj.extended.img.url }}" width="200px" height="400px">-->
+<img src="{% static 'img/my.jpeg' %}" width="200px" height="400px">
+</body>
+</html>

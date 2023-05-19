@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+  <form method="post">
+      {% csrf_token %}
+      <input type="text" name="fname" value="{{obj.Fname}}">
+      <input type="text" name="lname" value="{{obj.Lname}}">
+      <input type="email" name="email" value="{{obj.Email}}">
+      <input type="hidden" name="id" value="{{obj.id}}">
+      <button type="submit">update</button>
+  </form>
+
+  </body>
+</html>
