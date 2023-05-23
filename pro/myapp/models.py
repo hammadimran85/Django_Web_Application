@@ -37,3 +37,8 @@ def log(sender, instance, **kwargs):
     }]
     df = pd.DataFrame(user_log)
     df.to_csv('user_log.csv', header=False, sep="|", index=False, mode='a')
+class book(models.Model):
+    title=models.CharField(max_length=20)
+    author=models.CharField(max_length=20)
+    def __str__(self):
+        return str(self.title)
