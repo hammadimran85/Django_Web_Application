@@ -15,7 +15,39 @@ img
 <body>
 Hi Welcome to the Shopify Website, You can order multiple products .....         {{request.user}}
 <a href="{% url 'mylogout' %}">Logout</a><br>
-<!--<img src="{{obj.extended.img.url}}" width="200px" height="400px">-->
-<img src="{% static 'img/my.jpeg' %}" width="200px" height="400px">
+<h1>Welcome to the main page: {{request.user}}</h1>
+<a href="{% url 'mylogout' %}" >logout</a>
+<form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="firstname" id="fn" placeholder="Enter your first Name"> <br>
+    <input type="text" name="lastname" id="ln" placeholder="Enter your last Name"><br>
+    <input type="email" name="email" id="email" placeholder="Enter your email"><br>
+    <input type="password" name="password" id="password" placeholder="Enter password"><br>
+    <input type="file" name="file" id="f"><br>
+    <button type="submit">submit</button>
+</form>
+<p>{{msg}}</p>
+<table border="1" cellpadding="5" cellspacing="2">
+    <thead>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Photo</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ob in obj %}
+        <tr>
+            <td>{{ob.first_name}}</td>
+            <td>{{ob.last_name}}</td>
+            <td>{{ob.email}}</td>
+            <td><img src="{{ ob.extended.img.url }}" alt="error loading picture"  width ='100' height="100"></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!--<img src="{{ ob.extended.img.url }}" width="200px" height="400px">-->
+<!--<img src="{% static 'my.jpeg' %}" width="200px" height="400px">-->
 </body>
 </html>
