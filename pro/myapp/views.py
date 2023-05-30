@@ -149,9 +149,41 @@ def mysection(request):
     return render(request,"sections.html")
 def about(request):
     return render(request,"about.html")
-
+# rest_framework ------------------------------------------------------
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+# rest_framework ------------------------------------------------------
+@api_view(['GET','POST'])
 def bookserializer(request):
     if request.method=='GET':
         alldata=book.objects.all()
         data=bookserializers(alldata, many=True)
-        return JsonResponse(data.data, safe=False)
+        return Response(data.data)
+    else:
+        alldata=bookserializers(data=request.data)
+        if alldata.is_valid():
+            alldata.save()
+            data = book.objects.all()
+            alldata = bookserializers(data, many=True)
+            return Response(alldata.data)
+@api_view(['GET','PUT','DELETE'])
+def bookdata(request,id):
+    try:
+        alldata= book.objects.get(pk=id)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        mydata = bookserializers(alldata)
+        return Response(mydata.data)
+    if request.method == 'PUT':
+        mydata = bookserializers(alldata, data=request.data)
+        if mydata.is_valid():
+            mydata.save()
+            return Response(mydata.data)
+    if request.method == 'DELETE':
+        alldata.delete()
+        alldata = book.objects.all()
+        data = bookserializers(alldata, many=True)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

@@ -20,5 +20,6 @@ urlpatterns = [
     path('formdata/',views.formview,name='myform'),
     path('mysection/',views.mysection,name='mysection'),
     path('about/',views.about,name='about'),
-    path('serializer/',views.bookserializer,name='bookserializer')
+    path('serializer/',views.bookserializer,name='bookserializer'),
+    path('bookdata/<int:id>/',views.bookdata,name='bookdata')
 ]
